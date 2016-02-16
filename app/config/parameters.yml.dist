@@ -13,14 +13,8 @@ parameters:
 
     locale:             en
     secret:             ThisTokenIsNotSoSecretChangeIt
-    sulu_admin.name:    SULU 2
+    sulu_admin.name:    Sulu
     sulu_admin.email:   ~
 
     websocket_port: 9876
     websocket_url: 'sulu.lo'
-
-    ghost_script_path: /usr/bin/gs # OSX: /usr/local/bin/gs or Ubuntu: /usr/bin/gs
-    format_manager.response_headers:
-        Expires: "+1 month"
-        Pragma: "public"
-        Cache-Control: "public"

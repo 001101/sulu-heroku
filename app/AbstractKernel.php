@@ -1,20 +1,20 @@
 <?php
 
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Sulu\Component\HttpKernel\SuluKernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 /**
  * The abstract kernel holds everything that is common between
- * AdminKernel and WebsiteKernel
+ * AdminKernel and WebsiteKernel.
  */
 abstract class AbstractKernel extends SuluKernel
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             // symfony standard
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -22,6 +22,7 @@ abstract class AbstractKernel extends SuluKernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             // symfony cmf
@@ -41,19 +42,23 @@ abstract class AbstractKernel extends SuluKernel
             new Massive\Bundle\SearchBundle\MassiveSearchBundle(),
 
             // sulu
+            new Sulu\Bundle\SearchBundle\SuluSearchBundle(),
+            new Sulu\Bundle\CoreBundle\SuluCoreBundle(),
+            new Sulu\Bundle\PersistenceBundle\SuluPersistenceBundle(),
             new Sulu\Bundle\ContactBundle\SuluContactBundle(),
             new Sulu\Bundle\MediaBundle\SuluMediaBundle(),
             new Sulu\Bundle\SecurityBundle\SuluSecurityBundle(),
             new Sulu\Bundle\CategoryBundle\SuluCategoryBundle(),
             new Sulu\Bundle\SnippetBundle\SuluSnippetBundle(),
             new Sulu\Bundle\ContentBundle\SuluContentBundle(),
-            new Sulu\Bundle\CoreBundle\SuluCoreBundle(),
             new Sulu\Bundle\TagBundle\SuluTagBundle(),
             new Sulu\Bundle\WebsiteBundle\SuluWebsiteBundle(),
             new Sulu\Bundle\LocationBundle\SuluLocationBundle(),
-            new Sulu\Bundle\SearchBundle\SuluSearchBundle(),
             new Sulu\Bundle\HttpCacheBundle\SuluHttpCacheBundle(),
             new Sulu\Bundle\WebsocketBundle\SuluWebsocketBundle(),
+            new Sulu\Bundle\DocumentManagerBundle\SuluDocumentManagerBundle(),
+            new DTL\Bundle\PhpcrMigrations\PhpcrMigrationsBundle(),
+            new Dubture\FFmpegBundle\DubtureFFmpegBundle(),
 
             // website
             new Client\Bundle\WebsiteBundle\ClientWebsiteBundle(),
@@ -61,14 +66,13 @@ abstract class AbstractKernel extends SuluKernel
 
             // tools
             new Massive\Bundle\BuildBundle\MassiveBuildBundle(),
-        );
+        ];
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
             // symfony standard
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-
 
             // debug enhancement
             $bundles[] = new Sulu\Bundle\TestBundle\SuluTestBundle();
@@ -79,7 +83,7 @@ abstract class AbstractKernel extends SuluKernel
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
@@ -93,7 +97,7 @@ abstract class AbstractKernel extends SuluKernel
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCacheDir()
     {
@@ -101,7 +105,7 @@ abstract class AbstractKernel extends SuluKernel
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLogDir()
     {

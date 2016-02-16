@@ -1,6 +1,10 @@
 security:
     access_decision_manager:
-        strategy: affirmative
+        strategy: unanimous
+        allow_if_all_abstain: true
+
+    acl:
+        connection: default
 
     encoders:
         Sulu\Bundle\SecurityBundle\Entity\User:
@@ -29,6 +33,11 @@ security:
                 check_path: sulu_admin.login_check
                 success_handler: sulu_security.authentication_handler
                 failure_handler: sulu_security.authentication_handler
+                csrf_provider: security.csrf.token_manager
             logout:
                 path: /admin/logout
                 target: /admin/
+
+sulu_security:
+    checker:
+        enabled: true
